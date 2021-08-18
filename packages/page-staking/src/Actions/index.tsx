@@ -110,7 +110,9 @@ function formatTotal (typeIndex: number, state: State): React.ReactNode {
   return value && <FormatBalance value={value} />;
 }
 
-function Actions ({ className = '', isInElection, ownStashes, targets }: Props): React.ReactElement<Props> {
+function Actions ({ className = '', ownStashes, targets }: Props): React.ReactElement<Props> {
+  console.log(ownStashes)
+  let isInElection = false;
   const { t } = useTranslation();
   const allSlashes = useAvailableSlashes();
   const [typeIndex, setTypeIndex] = useState(0);

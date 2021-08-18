@@ -93,7 +93,7 @@ export default function useInactives (stashId: string, nominees?: string[]): Ina
     if (mountedRef.current && nominees && nominees.length && indexes) {
       api
         .queryMulti(
-          [[api.query.staking.nominators, stashId] as any]
+          [[api.query.staking.delegators, stashId] as any]
             .concat(
               api.query.staking.erasStakers
                 ? nominees.map((id) => [api.query.staking.erasStakers, [indexes.activeEra, id]])

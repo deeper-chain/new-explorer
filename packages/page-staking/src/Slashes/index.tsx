@@ -90,6 +90,7 @@ function Slashes ({ ownStashes = [], slashes }: Props): React.ReactElement<Props
   const { t } = useTranslation();
   const { api } = useApi();
   const { allAccounts } = useAccounts();
+  console.log(allAccounts)
   const { members } = useCollectiveMembers('council');
   const [selectedIndex, setSelectedIndex] = useState(0);
 
