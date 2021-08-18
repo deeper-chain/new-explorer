@@ -49,6 +49,7 @@ import nodeCrust from './nodes/crust.svg';
 import nodeCrustMaxwell from './nodes/crust-maxwell.svg';
 import nodeDarwinia from './nodes/darwinia.png';
 import nodeDataHighway from './nodes/datahighway.png';
+import nodeDeeper from './nodes/deeper.png';
 import nodeDockMainnet from './nodes/dock-mainnet.png';
 import nodeDockTestnet from './nodes/dock-testnet.png';
 import nodeDotMog from './nodes/dotmog.svg';
@@ -148,6 +149,7 @@ export const chainLogos = Object.entries({
   'Darwinia Crab PC2': nodeCrab,
   'Darwinia PC2': nodeDarwinia,
   DataHighway: nodeDataHighway,
+  'Deeper Network': nodeDeeper,
   Dusty: chainDusty,
   'Encointer Canary': nodeEncointerNotee,
   'Encointer PC1': nodeEncointerNotee,
@@ -279,6 +281,7 @@ export const nodeLogos = Object.entries({
   DataHighway: nodeDataHighway,
   'DataHighway Node': nodeDataHighway,
   'DataHighway Parachain Collator': nodeDataHighway,
+  'Deeper Network': nodeDeeper,
   'Dock Full Node': nodeDockMainnet,
   'DOTMog Node': nodeDotMog,
   'Eave Node': nodeEave,
@@ -423,6 +426,7 @@ export const namedLogos: Record<string, unknown> = {
   crab_redirect: nodeCrab,
   crust: nodeCrust,
   'Crust Maxwell': nodeCrustMaxwell,
+  'Deeper Network': nodeDeeper,
   darwinia: nodeDarwinia,
   datahighway: nodeDataHighway,
   'dock-mainnet': nodeDockMainnet,

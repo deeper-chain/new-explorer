@@ -69,7 +69,37 @@ function isKeyringLoaded () {
 }
 
 function getDevTypes (): Record<string, Record<string, string>> {
-  const types = decodeUrlTypes() || store.get('types', {}) as Record<string, Record<string, string>>;
+  const types = {
+    Balance: 'u128',
+    Timestamp: 'Moment',
+    BlockNumber: 'u32',
+    IpV4: 'Vec<u8>',
+    CountryRegion: 'Vec<u8>',
+    Duration: 'u8',
+    Node: {
+      account_id: 'AccountId',
+      ipv4: 'IpV4',
+      country: 'CountryRegion',
+      expire: 'BlockNumber',
+    },
+    ChannelOf: {
+      sender: 'AccountId',
+      receiver: 'AccountId',
+      balance: 'Balance',
+      nonce: 'u64',
+      opened: 'BlockNumber',
+      expiration: 'BlockNumber',
+    },
+    CreditDelegateInfo: {
+      delegator: 'AccountId',
+      score: 'u64',
+      validators: 'Vec<AccountId>',
+    },
+    "DelegatorData": {
+      "delegated_validators": "Vec<AccountId>"
+    },
+  };
+
   const names = Object.keys(types);
 
   names.length && console.log('Injected types:', names.join(', '));

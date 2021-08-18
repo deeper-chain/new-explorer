@@ -1297,6 +1297,7 @@
   "rpc.clover.finance": "Clover",
   "rpc.crab": "Darwinia Crab",
   "rpc.crust.network": "Crust Maxwell",
+  "rpc.deeper.network": "Deeper Network",
   "rpc.custom": "Environment personnalisé",
   "rpc.custom.entry": "Personalisé {{WS_URL}}",
   "rpc.custom.own": "Personalisé",

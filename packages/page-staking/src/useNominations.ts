@@ -35,8 +35,7 @@ function extractNominators (nominations: [StorageKey, Option<Nominations>][]): R
 
 export default function useNominations (isActive = true): Result | undefined {
   const { api } = useApi();
-  const nominators = useCall<[StorageKey, Option<Nominations>][]>(isActive && api.query.staking.nominators.entries);
-
+  const nominators = useCall<[StorageKey, Option<Nominations>][]>(isActive && api.query.staking.delegators.entries);
   return useMemo(
     () => nominators && extractNominators(nominators),
     [nominators]

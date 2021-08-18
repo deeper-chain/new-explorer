@@ -102,7 +102,7 @@ function Nominate ({ className = '', isDisabled, ownNominators, targets }: Props
               label={t<string>('Nominate')}
               onStart={toggleOpen}
               params={[targets]}
-              tx={api.tx.staking.nominate}
+              tx={api.tx.staking.candidateValidators}
             />
           </Modal.Actions>
         </Modal>

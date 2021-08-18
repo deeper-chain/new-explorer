@@ -32,7 +32,8 @@ const HIDDEN_ACC = ['actions', 'payout'];
 const optionsParaValidators = {
   defaultValue: [false, {}] as [boolean, Record<string, boolean>],
   transform: ([eraElectionStatus, validators, activeValidatorIndices]: [ElectionStatus | null, ValidatorId[] | null, ParaValidatorIndex[] | null]): [boolean, Record<string, boolean>] => [
-    !!eraElectionStatus && eraElectionStatus.isOpen,
+    // !!eraElectionStatus && eraElectionStatus.isOpen,
+    true,
     validators && activeValidatorIndices
       ? activeValidatorIndices.reduce((all, index) => ({ ...all, [validators[index.toNumber()].toString()]: true }), {})
       : {}

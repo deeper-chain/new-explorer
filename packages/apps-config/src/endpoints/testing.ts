@@ -83,6 +83,13 @@ export function createTesting (t: TFunction, firstOnly?: boolean): LinkOption[] 
         'DCloud Foundation': 'wss://api.decloudf.com/'
       }
     },
+    {
+      info: 'Deeper Network',
+      text: t('rpc.test.deeper.network', 'Deeper Network', { ns: 'apps-config' }),
+      providers: {
+        'Deeper Network': 'wss://mainnet-deeper-chain.deeper.network/',
+      }
+    },
     // {
     //   info: 'rocky',
     //   text: t('rpc.test.crust.network', 'Crust Rocky', { ns: 'apps-config' }),
