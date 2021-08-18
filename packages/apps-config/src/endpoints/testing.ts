@@ -68,6 +68,13 @@ export function createTesting (t: TFunction, firstOnly?: boolean): LinkOption[] 
       }
     },
     {
+      info: 'phala',
+      text: t('rpc.test.phala', 'Chala (Para1)', { ns: 'apps-config' }),
+      providers: {
+        'Phala Network': 'wss://chala-api.phala.network/ws/'
+      }
+    },
+    {
       info: 'clover',
       isDisabled: true, // Cannot construct unknown type BridgeNetworks
       text: t('rpc.test.clover.finance', 'Clover', { ns: 'apps-config' }),
@@ -204,7 +211,7 @@ export function createTesting (t: TFunction, firstOnly?: boolean): LinkOption[] 
       info: 'interbtc',
       text: t('rpc.test.interbtc', 'InterBTC', { ns: 'apps-config' }),
       providers: {
-        Interlay: 'wss://api-dev.interlay.io/parachain/'
+        Interlay: 'wss://api.interlay.io/parachain/'
       }
     },
     {
@@ -319,13 +326,6 @@ export function createTesting (t: TFunction, firstOnly?: boolean): LinkOption[] 
       text: t('rpc.test.pangolin', 'Pangolin', { ns: 'apps-config' }),
       providers: {
         'Darwinia Network': 'wss://pangolin-rpc.darwinia.network'
-      }
-    },
-    {
-      info: 'phala',
-      text: t('rpc.test.phala', 'Phala PoC-4', { ns: 'apps-config' }),
-      providers: {
-        'Phala Network': 'wss://poc4.phala.network/ws'
       }
     },
     {
