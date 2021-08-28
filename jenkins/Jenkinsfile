@@ -86,7 +86,9 @@ pipeline {
                 }
             }
             steps {
+               dir('docker'){
                 sh 'docker build -t $TARGET_DOCKER_IMAGE .'
+               }
             }
         }
         // master和dev镜像进行去推送
