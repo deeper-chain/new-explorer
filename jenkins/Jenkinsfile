@@ -4,7 +4,7 @@
 //def upstreamProject = "xxxx"
 
 //定义执行jenkins工程的node
-def execNode = 'master-runner'
+def execNode = 'common-runner'
 //定义仓库，镜像可与仓库名分开
 def registry = '561108432312.dkr.ecr.ap-southeast-1.amazonaws.com/deeper-chain/new-explorer'
 def dockerTag = 'prod'
