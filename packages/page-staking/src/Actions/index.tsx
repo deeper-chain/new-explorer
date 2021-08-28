@@ -127,7 +127,7 @@ function Actions ({ className = '', ownStashes, targets }: Props): React.ReactEl
 
   const typeRef = useRef([
     { text: t('All stashes'), value: 'all' },
-    { text: t('Nominators'), value: 'noms' },
+    // { text: t('Nominators'), value: 'noms' },
     { text: t('Validators'), value: 'vals' },
     { text: t('Inactive'), value: 'chill' }
   ]);
@@ -158,10 +158,10 @@ function Actions ({ className = '', ownStashes, targets }: Props): React.ReactEl
           options={typeRef.current}
           value={typeIndex}
         />
-        <NewNominator
+        {/* <NewNominator
           isInElection={isInElection}
           targets={targets}
-        />
+        /> */}
         <NewValidator
           isInElection={isInElection}
           targets={targets}
