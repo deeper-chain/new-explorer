@@ -1,0 +1,134 @@
+#!groovy
+
+//预留一个upstreamproject，可用来触发其他工程构建
+//def upstreamProject = "xxxx"
+
+//定义执行jenkins工程的node
+def execNode = 'master-runner'
+//定义仓库，镜像可与仓库名分开
+def registry = '561108432312.dkr.ecr.ap-southeast-1.amazonaws.com/deeper-chain/new-explorer'
+def dockerTag = 'prod'
+//定义部署指令，kubectl或者ansible指令
+def deployCmd = 'kubectl rollout restart --namespace=deeper-chain deployment/deeper-chain-new-explorer'
+
+//预留master配置信息，后面master的仓库和执行节点可与其他节点分开、master的部署指令与dev的部署指令分开
+//if (env.BRANCH_NAME == "master") {
+//    registry = "561108432312.dkr.ecr.ap-southeast-1.amazonaws.com"
+//    dockerTag = "dpr-web-prod"
+//    deployCmd = "kubectl rollout restart deployment/dpr-web -n dpr"
+//}
+
+def upstreamProjects = ''
+
+pipeline {
+    agent {
+        node { label execNode }
+    }
+
+    options {
+        disableConcurrentBuilds()
+        buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '3'))
+    }
+
+    triggers {
+        upstream(
+            upstreamProjects: upstreamProjects,
+            threshold: hudson.model.Result.SUCCESS
+        )
+    }
+    environment {
+        webhook_key = credentials('webhook_key')
+        //DOCKER_BUILDKIT = "1"  //TODO 后面build可以使用BUILDKIT
+        TARGET_DOCKER_IMAGE = "${registry}:${dockerTag}"
+        DEPLOY_CMD = "${deployCmd}"
+    }
+
+    stages {
+        // 非master分支都进行单元测试
+        stage('test') {
+            when {
+                not {
+                    anyOf {
+                        branch 'master'
+                       branch 'dev'
+                    }
+                }
+            }
+            stages {
+                stage('Unit Test') {
+                    steps {
+                        echo 'prepare to code test'
+                    //TODO
+                    }
+                }
+                // 非PR的都生成单元测试覆盖率和代码质量报告
+                stage('report') {
+                    when {
+                        not {
+                            branch 'PR-*'
+                        }
+                    }
+                    steps {
+                        echo 'generate code report'
+                    //TODO
+                    }
+                }
+            }
+        }
+
+        // master和dev分支进行构建镜像
+        stage('Build image') {
+            when {
+                anyOf {
+                   branch 'master'
+                   branch 'dev'
+
+                }
+            }
+            steps {
+                sh 'docker build -t $TARGET_DOCKER_IMAGE .'
+            }
+        }
+        // master和dev镜像进行去推送
+        stage('push image') {
+            when {
+                anyOf {
+                    branch 'master'
+                    branch 'dev'
+
+                }
+            }
+            steps {
+                sh 'docker push $TARGET_DOCKER_IMAGE'
+            }
+        }
+        // master和dev分支进行代码部署
+        stage('Deploy code') {
+            when {
+                anyOf {
+                    branch 'master'
+                    branch 'deploy'
+                }
+            }
+            steps {
+                sh '$DEPLOY_CMD'
+            }
+        }
+    }
+    post {
+        // TODO 可以加个清理的步骤
+        //always {
+        //    sh '** clean'
+        //}
+        fixed {
+            script {
+                    sh(script: 'bash jenkins/post.sh fixed')
+            }
+        }
+        regression {
+            script {
+                    sh(script: 'bash jenkins/post.sh regression')
+            }
+        }
+    }
+}
