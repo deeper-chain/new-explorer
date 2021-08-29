@@ -50,7 +50,7 @@ pipeline {
                 not {
                     anyOf {
                         branch 'master'
-                       branch 'dev'
+                        branch 'dev'
                     }
                 }
             }
@@ -80,14 +80,12 @@ pipeline {
         stage('Build image') {
             when {
                 anyOf {
-                   branch 'master'
-                   branch 'dev'
-
+                    branch 'master'
+                    branch 'dev'
                 }
             }
             steps {
                 sh 'docker build -f docker/Dockerfile -t $TARGET_DOCKER_IMAGE .'
-               
             }
         }
         // master和dev镜像进行去推送
@@ -96,7 +94,6 @@ pipeline {
                 anyOf {
                     branch 'master'
                     branch 'dev'
-
                 }
             }
             steps {
