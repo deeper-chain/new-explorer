@@ -122,7 +122,7 @@ function Menu ({ className = '' }: Props): React.ReactElement<Props> {
   );
 
   return (
-    <div className={`${className}${(!apiProps.isApiReady || !apiProps.isApiConnected) ? ' isLoading' : ''} highlight--bg`}>
+    <div className={`${className}${(!apiProps.isApiReady || !apiProps.isApiConnected) ? ' isLoading' : ''} highlight--deeper`}>
       <div className='menuContainer'>
         <div className='menuSection'>
           <ChainInfo />
@@ -133,18 +133,6 @@ function Menu ({ className = '' }: Props): React.ReactElement<Props> {
                 key={name}
                 name={name}
                 routes={routes}
-              />
-            ))}
-          </ul>
-        </div>
-        <div className='menuSection media--1200'>
-          <ul className='menuItems'>
-            {externalRef.current.map((route): React.ReactNode => (
-              <Item
-                isLink
-                isToplevel
-                key={route.name}
-                route={route}
               />
             ))}
           </ul>
@@ -170,6 +158,9 @@ export default React.memo(styled(Menu)`
     width: 100%;
     max-width: var(--width-full);
     margin: 0 auto;
+  }
+  &.highlight--deeper {
+    background: #5ccaf3;
   }
 
   &.isLoading {

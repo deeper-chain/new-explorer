@@ -21,12 +21,9 @@ function NodeInfo ({ className = '' }: Props): React.ReactElement<Props> {
     <div className={`${className} media--1400 highlight--color-contrast ui--NodeInfo`}>
       {isApiReady && (
         <div>
-          <NodeName />&nbsp;
-          <NodeVersion label='v' />
+          Deeper Chain Node 1.0.0
         </div>
       )}
-      <div>{api.libraryInfo.replace('@polkadot/', '')}</div>
-      <div>{uiInfo}</div>
     </div>
   );
 }

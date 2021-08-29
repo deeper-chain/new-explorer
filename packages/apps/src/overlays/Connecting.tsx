@@ -33,15 +33,15 @@ function Connecting ({ className }: Props): React.ReactElement<Props> | null {
       </BaseOverlay>
     );
   } else if (!isApiReady) {
-    return (
-      <BaseOverlay
-        className={className}
-        icon='globe'
-        type='info'
-      >
-        <div>{t<string>('Waiting to make a connection to the remote endpoint and finishing API initialization.')}</div>
-      </BaseOverlay>
-    );
+    // return (
+    //   <BaseOverlay
+    //     className={className}
+    //     icon='globe'
+    //     type='info'
+    //   >
+    //     <div>{t<string>('Waiting to make a connection to the remote endpoint and finishing API initialization.')}</div>
+    //   </BaseOverlay>
+    // );
   } else if (isWaitingInjected) {
     return (
       <BaseOverlay
