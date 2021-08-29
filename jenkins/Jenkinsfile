@@ -85,6 +85,7 @@ pipeline {
                 }
             }
             steps {
+                sh 'docker pull $TARGET_DOCKER_IMAGE || true' // 把镜像下载下来加速第一次构建
                 sh 'docker build -f docker/Dockerfile -t $TARGET_DOCKER_IMAGE .'
             }
         }
