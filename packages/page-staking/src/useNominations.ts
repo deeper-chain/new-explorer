@@ -7,7 +7,7 @@ import type { NominatedBy } from './types';
 
 import { useMemo } from 'react';
 
-import { useApi, useCall } from '@polkadot/react-hooks';
+import { createNamedHook, useApi, useCall } from '@polkadot/react-hooks';
 
 type Result = Record<string, NominatedBy[]>;
 
@@ -33,7 +33,7 @@ function extractNominators (nominations: [StorageKey, Option<Nominations>][]): R
   }, {});
 }
 
-export default function useNominations (isActive = true): Result | undefined {
+function useNominationsImpl (isActive = true): Result | undefined {
   const { api } = useApi();
   const nominators = useCall<[StorageKey, Option<Nominations>][]>(isActive && api.query.staking.delegators.entries);
   return useMemo(
@@ -41,3 +41,5 @@ export default function useNominations (isActive = true): Result | undefined {
     [nominators]
   );
 }
+
+export default createNamedHook('useNominations', useNominationsImpl);
