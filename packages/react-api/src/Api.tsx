@@ -73,9 +73,6 @@ function getDevTypes (): Record<string, Record<string, string>> {
     "Address": "MultiAddress",
     "LookupSource": "MultiAddress",
     "AccountInfo": "AccountInfoWithDualRefCount",
-    "Balance": "u128",
-    "Timestamp": "Moment",
-    "BlockNumber": "u32",
     "IpV4": "Vec<u8>",
     "CountryRegion": "Vec<u8>",
     "DurationEras": "u8",
@@ -86,77 +83,12 @@ function getDevTypes (): Record<string, Record<string, string>> {
         "expire": "BlockNumber"
     },
     "ChannelOf": {
-        "sender": "AccountId",
-        "receiver": "AccountId",
+        "client": "AccountId",
+        "server": "AccountId",
         "balance": "Balance",
         "nonce": "u64",
         "opened": "BlockNumber",
         "expiration": "BlockNumber"
-    },
-    "MemberId": "u64",
-    "ProposalId": "u64",
-    "Limits": {
-      "max_tx_value": "u128",
-      "day_max_limit": "u128",
-      "day_max_limit_for_one_address": "u128",
-      "max_pending_tx_limit": "u128",
-      "min_tx_value": "u128"
-    },
-    "Status": {
-      "_enum": [
-        "Revoked",
-        "Pending",
-        "PauseTheBridge",
-        "ResumeTheBridge",
-        "UpdateValidatorSet",
-        "UpdateLimits",
-        "Deposit",
-        "Withdraw",
-        "Approved",
-        "Canceled",
-        "Confirmed"
-      ]
-    },
-    "Kind": {
-      "_enum": [
-        "Transfer",
-        "Limits",
-        "Validator",
-        "Bridge"
-      ]
-    },
-    "TransferMessage": {
-      "message_id": "H256",
-      "eth_address": "H160",
-      "substrate_address": "AccountId",
-      "amount": "TokenBalance",
-      "status": "Status",
-      "action": "Status"
-    },
-    "LimitMessage": {
-      "id": "H256",
-      "limits": "Limits",
-      "status": "Status"
-    },
-    "BridgeMessage": {
-      "message_id": "H256",
-      "account": "AccountId",
-      "status": "Status",
-      "action": "Status"
-    },
-    "ValidatorMessage": {
-      "message_id": "H256",
-      "quorum": "u64",
-      "accounts": "Vec<AccountId>",
-      "status": "Status",
-      "action": "Status"
-    },
-    "BridgeTransfer": {
-      "transfer_id": "ProposalId",
-      "message_id": "H256",
-      "open": "bool",
-      "votes": "MemberId",
-      "kind": "Kind"
     },
     "CreditLevel": {
       "_enum": [
@@ -183,6 +115,7 @@ function getDevTypes (): Record<string, Record<string, string>> {
       "max_referees_with_rewards": "u8",
       "reward_per_referee": "Balance"
     },
+    "EraIndex": "u32",
     "CreditData": {
       "campaign_id": "CampaignId",
       "credit": "u64",
@@ -198,9 +131,8 @@ function getDevTypes (): Record<string, Record<string, string>> {
       "unrewarded_since": "Option<EraIndex>",
       "delegating": "bool"
     },
-    "EraIndex": "u32",
     "ValidatorData": {
-      "delegators": "Vec<AccountId>",
+      "delegators": "BTreeSet<AccountId>",
       "elected_era": "EraIndex"
     },
     "RewardData": {
@@ -211,7 +143,7 @@ function getDevTypes (): Record<string, Record<string, string>> {
       "poc_reward": "Balance"
     },
     "ValidatorPrefs": {
-      "commission": "Perbill",
+      "commission": "Compact<Perbill>",
       "blocked": "bool"
     }
   }
