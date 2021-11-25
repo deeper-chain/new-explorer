@@ -34,11 +34,33 @@ function getApiUrl (): string {
 
     return url;
   }
-  return "wss://mainnet-deeper-chain.deeper.network/"
+
+  const endpoints = createWsEndpoints(<T = string>(): T => ('' as unknown as T));
+  const { ipnsChain } = extractIpfsDetails();
+
+  // check against ipns domains (could be expanded to others)
+  if (ipnsChain) {
+    const option = endpoints.find(({ dnslink }) => dnslink === ipnsChain);
+
+    if (option) {
+      return option.value;
+    }
+  }
+
+  const stored = store.get('settings') as Record<string, unknown> || {};
+  const fallbackUrl = endpoints.find(({ value }) => !!value);
+
+  // via settings, or the default chain
+  return [stored.apiUrl, process.env.WS_URL].includes(settings.apiUrl)
+    ? settings.apiUrl // keep as-is
+    : fallbackUrl
+      ? fallbackUrl.value // grab the fallback
+      : 'ws://127.0.0.1:9944'; // nothing found, go local
 }
 
 // There cannot be a Substrate Connect light client default (expect only jrpc EndpointType)
 const apiUrl = getApiUrl();
+
 // set the default as retrieved here
 settings.set({ apiUrl });
 
