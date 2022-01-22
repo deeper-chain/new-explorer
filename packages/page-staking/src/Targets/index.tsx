@@ -267,9 +267,7 @@ function Targets ({ className = '', isInElection, ownStashes, targets: { avgStak
     () => filtered && setSelected(
       selectProfitable(
         filtered,
-        api.consts.staking.maxNominations
-          ? api.consts.staking.maxNominations.toNumber()
-          : MAX_NOMINATIONS
+        MAX_NOMINATIONS
       )
     ),
     [api, filtered]
@@ -351,9 +349,7 @@ function Targets ({ className = '', isInElection, ownStashes, targets: { avgStak
   const displayList = isQueryFiltered
     ? validators
     : sorted;
-  const maxNominations = api.consts.staking.maxNominations
-    ? api.consts.staking.maxNominations.toNumber()
-    : MAX_NOMINATIONS;
+  const maxNominations = MAX_NOMINATIONS;
 
   return (
     <div className={className}>

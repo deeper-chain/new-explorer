@@ -54,9 +54,7 @@ function Nominate ({ className = '', controllerId, nominating, onChange, stashId
     }
   }, [api, onChange, selected]);
 
-  const maxNominations = api.consts.staking.maxNominations
-    ? api.consts.staking.maxNominations.toNumber()
-    : MAX_NOMINATIONS;
+  const maxNominations = MAX_NOMINATIONS;
 
   return (
     <div className={className}>
