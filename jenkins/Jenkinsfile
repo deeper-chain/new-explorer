@@ -3,11 +3,12 @@ def execNode = 'common-runner'
 def registry = '561108432312.dkr.ecr.ap-southeast-1.amazonaws.com/deeper-chain/new-explorer'
 def dockerTag = 'prod'
 def deployCmd = 'kubectl rollout restart --namespace=deeper-chain deployment/deeper-chain-new-explorer'
+def deployCmdForTopster = 'echo "No topster app for production yet"'
 
-
-if (env.BRANCH_NAME == "dev") {
-    dockerTag = "dev"
-    deployCmd = "kubectl rollout restart deployment/deeper-chain-new-explorer -n dev"
+if (env.BRANCH_NAME == 'dev') {
+    dockerTag = 'dev'
+    deployCmd = 'kubectl rollout restart deployment/deeper-chain-new-explorer -n dev'
+    deployCmdForTopster = 'kubectl rollout restart deployment/topster-chain-new-explorer -n dev'
 }
 
 def upstreamProjects = ''
@@ -30,7 +31,7 @@ pipeline {
     }
     environment {
         webhook_key = credentials('webhook_key')
-        //DOCKER_BUILDKIT = "1"  
+        //DOCKER_BUILDKIT = "1"
         TARGET_DOCKER_IMAGE = "${registry}:${dockerTag}"
         DEPLOY_CMD = "${deployCmd}"
     }
@@ -74,7 +75,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'docker pull $TARGET_DOCKER_IMAGE || true' 
+                sh 'docker pull $TARGET_DOCKER_IMAGE || true'
                 sh 'docker build -f docker/Dockerfile -t $TARGET_DOCKER_IMAGE .'
             }
         }
@@ -94,10 +95,12 @@ pipeline {
                 anyOf {
                     branch 'master'
                     branch 'deploy'
+                    branch 'dev'
                 }
             }
             steps {
                 sh '$DEPLOY_CMD'
+                sh "${deployCmdForTopster}"
             }
         }
     }
