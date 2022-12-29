@@ -17,9 +17,6 @@ interface Props {
 }
 
 const OPTIONS = {
-  animation: {
-    duration: 0
-  },
   aspectRatio: 6,
   maintainAspectRatio: true
 };

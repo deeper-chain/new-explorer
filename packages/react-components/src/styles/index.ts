@@ -30,7 +30,7 @@ function getHighlight (uiHighlight: string | undefined): string {
 function countBrightness (uiHighlight: string | undefined): number {
   const hc = getHighlight(uiHighlight).replace('#', '').toLowerCase();
 
-  return PARTS.reduce((b, p, index) => b + (parseInt(hc.substr(p, 2), 16) * FACTORS[index]), 0);
+  return PARTS.reduce((b, p, index) => b + (parseInt(hc.substring(p, p + 2), 16) * FACTORS[index]), 0);
 }
 
 function getContrast (uiHighlight: string | undefined): string {
@@ -489,6 +489,16 @@ export default createGlobalStyle<Props & ThemeProps>(({ theme, uiHighlight }: Pr
     color: var(--color-summary);
     font: var(--font-sans);
     font-weight: var(--font-weight-light);
+    margin-bottom: 0.25rem;
+  }
+
+  h5 {
+    color: var(--color-label);
+    font-style: normal;
+    font-weight: var(--font-weight-normal);
+    font-size: 0.714rem;
+    line-height: 1rem;
+    text-transform: uppercase;
     margin-bottom: 0.25rem;
   }
 

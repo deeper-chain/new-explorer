@@ -16,6 +16,7 @@ interface TableProps {
   filter?: React.ReactNode;
   footer?: React.ReactNode;
   header?: [React.ReactNode?, string?, number?, (() => void)?][];
+  headerChildren?: React.ReactNode;
   isFixed?: boolean;
   isInline?: boolean;
   legend?: React.ReactNode;
@@ -34,18 +35,20 @@ function extractBodyChildren (children: React.ReactNode): [boolean, React.ReactN
   return [isEmpty, isEmpty ? null : kids];
 }
 
-function Table ({ children, className = '', empty, emptySpinner, filter, footer, header, isFixed, isInline, legend, noBodyTag, withCollapsibleRows = false }: TableProps): React.ReactElement<TableProps> {
+function Table ({ children, className = '', empty, emptySpinner, filter, footer, header, headerChildren, isFixed, isInline, legend, noBodyTag, withCollapsibleRows = false }: TableProps): React.ReactElement<TableProps> {
   const [isEmpty, bodyChildren] = extractBodyChildren(children);
 
   return (
     <div className={`ui--Table ${className}`}>
       {legend}
-      <table className={`${(isFixed && !isEmpty) ? 'isFixed' : 'isNotFixed'} ${isInline ? 'isInline' : ''} highlight--bg-faint${withCollapsibleRows ? ' withCollapsibleRows' : ''}`}>
+      <table className={`${(isFixed && !isEmpty) ? 'isFixed' : 'isNotFixed'} ${isInline ? 'isInline' : ''} ${withCollapsibleRows ? 'withCollapsibleRows' : ''}`}>
         <Head
           filter={filter}
           header={header}
           isEmpty={isEmpty}
-        />
+        >
+          {headerChildren}
+        </Head>
         <Body
           empty={empty}
           emptySpinner={emptySpinner}
@@ -83,13 +86,13 @@ export default React.memo(styled(Table)`
     }
 
     &.isInline {
-      &.highlight--bg-faint,
-      &.highlight--bg-faint::before {
-        background: transparent;
-      }
+      // &.highlight--bg-faint,
+      // &.highlight--bg-faint::before {
+      //   background: transparent;
+      // }
 
       tbody tr {
-        background: transparent;
+        // background: transparent;
 
         td {
           border-top-width: 1px;
@@ -126,20 +129,29 @@ export default React.memo(styled(Table)`
       }
     }
 
-    &.withCollapsibleRows tbody tr {
-      background-color: unset;
+    // &.withCollapsibleRows tbody tr {
+    //   background-color: unset;
 
-      &:nth-child(4n - 2),
-      &:nth-child(4n - 3) {
-        background-color: var(--bg-table);
-      }
-    }
+    //   &:nth-child(4n - 2),
+    //   &:nth-child(4n - 3) {
+    //     background-color: var(--bg-table);
+    //   }
+    // }
 
-    &:not(.withCollapsibleRows) tbody tr {
-      &.isOdd,
-      &:nth-child(odd):not(.isEven) {
-        background: var(--bg-table);
-      }
+    // &:not(.withCollapsibleRows) tbody tr {
+    //   &.isOdd,
+    //   &:nth-child(odd):not(.isEven) {
+    //     background: var(--bg-table);
+    //   }
+    // }
+  }
+
+  tbody, thead {
+    position: relative;
+    width: 100%;
+
+    tr {
+      width: 100%;
     }
   }
 
@@ -147,10 +159,14 @@ export default React.memo(styled(Table)`
     position: relative;
 
     td {
-      border-bottom: 1px solid var(--border-table);
+      border-bottom: 0.125rem /* 1px */ solid var(--border-table);
       padding: 0.5rem 1rem;
       text-align: left;
       vertical-align: middle;
+
+      > article.mark {
+        margin-left: 0rem;
+      }
 
       &:first-child {
         border-left: 1px solid var(--border-table);
@@ -185,6 +201,10 @@ export default React.memo(styled(Table)`
 
       &.badge {
         padding: 0.5rem;
+      }
+
+      &.balance {
+        min-width: 20rem;
       }
 
       &.button {
@@ -246,8 +266,34 @@ export default React.memo(styled(Table)`
         text-align: right;
       }
 
+      &.actions {
+        width: 1%;
+
+        > div {
+          display: flex;
+          align-items: center;
+          flex-wrap: nowrap;
+          justify-content: flex-end;
+
+          & > * + * {
+            margin-left: 0.35rem;
+          }
+
+          .ui--Button {
+            white-space: nowrap;
+          }
+        }
+      }
+
       &.relative {
         position: relative;
+
+        .absolute {
+          position: absolute;
+          right: 0;
+          top: 0.25rem;
+          white-space: nowrap;
+        }
       }
 
       &.overflow {
@@ -299,9 +345,11 @@ export default React.memo(styled(Table)`
     }
 
     tr {
+      background: var(--bg-table);
+
       &:first-child {
         td {
-          border-top: 0.25rem solid var(--bg-page);
+          border-top: 0.125rem solid var(--bg-page);
         }
 
         td:first-child {
@@ -315,7 +363,7 @@ export default React.memo(styled(Table)`
 
       &:last-child {
         td {
-          border-bottom: 1px solid var(--border-table);
+          border-bottom: /* 1px */ 0.125rem solid var(--border-table);
 
           &:first-child {
             border-bottom-left-radius: 0.25rem;

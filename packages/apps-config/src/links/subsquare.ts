@@ -9,10 +9,12 @@ export default {
   chains: {
     Acala: 'acala',
     Altair: 'altair',
+    Basilisk: 'basilisk',
     Bifrost: 'bifrost',
     Centrifuge: 'centrifuge',
     Crust: 'crust',
     'Darwinia Crab': 'crab',
+    HydraDX: 'hydradx',
     Interlay: 'interlay',
     Karura: 'karura',
     Khala: 'khala',
@@ -32,7 +34,9 @@ export default {
     bounty: 'treasury/bounty',
     council: 'council/motion',
     external: 'democracy/external',
+    fellowshipReferenda: 'fellowship/referendum',
     proposal: 'democracy/proposal',
+    referenda: 'referenda/referendum',
     referendum: 'democracy/referendum',
     tip: 'treasury/tip',
     treasury: 'treasury/proposal'

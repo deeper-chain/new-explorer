@@ -99,29 +99,25 @@ function Bounty ({ bestNumber, bounty, className = '', description, index, propo
             blocksUntilUpdate={blocksUntilUpdate}
             status={status}
           />
+          <BountyActions
+            bestNumber={bestNumber}
+            description={description}
+            fee={fee}
+            index={index}
+            proposals={proposals}
+            status={status}
+            value={value}
+          />
         </td>
-        <td className='td-info-action-row'>
-          <div className='td-row'>
-            <BountyInfos
-              beneficiary={beneficiary}
-              proposals={proposals}
-              status={status}
-            />
-            <div className='bounty-action-row'>
-              <BountyActions
-                bestNumber={bestNumber}
-                description={description}
-                fee={fee}
-                index={index}
-                proposals={proposals}
-                status={status}
-                value={value}
-              />
-            </div>
-          </div>
+        <td>
+          <BountyInfos
+            beneficiary={beneficiary}
+            proposals={proposals}
+            status={status}
+          />
         </td>
-        <td className='fast-actions'>
-          <div className='fast-actions-row'>
+        <td className='actions'>
+          <div>
             <LinkExternal
               data={index}
               type='bounty'
@@ -206,21 +202,6 @@ export default React.memo(styled(Bounty)`
 
   & .links {
     display: inline-flex;
-  }
-
-  & td.fast-actions {
-    padding-left: 0.2rem;
-    width: 1%;
-
-    .fast-actions-row {
-      align-items: center;
-      display: flex;
-      justify-content: flex-end;
-
-      & > * + * {
-        margin-left: 0.285rem;
-      }
-    }
   }
 
   & .inline-balance {
