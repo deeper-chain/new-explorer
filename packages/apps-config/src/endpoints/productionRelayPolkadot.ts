@@ -1,4 +1,4 @@
-// Copyright 2017-2022 @polkadot/apps-config authors & contributors
+// Copyright 2017-2023 @polkadot/apps-config authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import type { EndpointOption } from './types';
@@ -38,7 +38,8 @@ export const prodParasPolkadot: EndpointOption[] = [
     paraId: 2051,
     text: 'Ajuna Network',
     providers: {
-      AjunaNetwork: 'wss://rpc-parachain.ajuna.network'
+      AjunaNetwork: 'wss://rpc-parachain.ajuna.network',
+      OnFinality: 'wss://ajuna.api.onfinality.io/public-ws'
     }
   },
   {
@@ -138,10 +139,9 @@ export const prodParasPolkadot: EndpointOption[] = [
     info: 'crustParachain',
     homepage: 'https://crust.network',
     paraId: 2008,
-    isUnreachable: true,
     text: 'Crust',
     providers: {
-      Crust: 'wss://rpc.crust.network'
+      Crust: 'wss://crust-parachain.crustapps.net'
     }
   },
   {
@@ -169,8 +169,7 @@ export const prodParasPolkadot: EndpointOption[] = [
     text: 'Efinity',
     providers: {
       Efinity: 'wss://rpc.efinity.io',
-      Dwellir: 'wss://efinity-rpc.dwellir.com',
-      OnFinality: 'wss://efinity.api.onfinality.io/public-ws'
+      Dwellir: 'wss://efinity-rpc.dwellir.com'
     }
   },
   {
@@ -336,7 +335,7 @@ export const prodParasPolkadot: EndpointOption[] = [
     text: 'OmniBTC',
     paraId: 2053,
     providers: {
-      OmniBTC: 'wss://omnibtc.io/ws'
+      OmniBTC: 'wss://psc-parachain.coming.chat'
     }
   },
   {
@@ -431,6 +430,7 @@ export const prodParasPolkadotCommon: EndpointOption[] = [
       Parity: 'wss://statemint-rpc.polkadot.io',
       OnFinality: 'wss://statemint.api.onfinality.io/public-ws',
       Dwellir: 'wss://statemint-rpc.dwellir.com',
+      'Dwellir Tunisia': 'wss://statemint-rpc-tn.dwellir.com',
       Pinknode: 'wss://public-rpc.pinknode.io/statemint',
       RadiumBlock: 'wss://statemint.public.curie.radiumblock.co/ws'
     }
@@ -455,6 +455,7 @@ export const prodRelayPolkadot: EndpointOption = {
     Parity: 'wss://rpc.polkadot.io',
     OnFinality: 'wss://polkadot.api.onfinality.io/public-ws',
     Dwellir: 'wss://polkadot-rpc.dwellir.com',
+    'Dwellir Tunisia': 'wss://polkadot-rpc-tn.dwellir.com',
     Pinknode: 'wss://public-rpc.pinknode.io/polkadot',
     RadiumBlock: 'wss://polkadot.public.curie.radiumblock.co/ws',
     // 'Geometry Labs': 'wss://polkadot.geometry.io/websockets', // https://github.com/polkadot-js/apps/pull/6746

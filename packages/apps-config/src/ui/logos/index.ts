@@ -1,4 +1,4 @@
-// Copyright 2017-2022 @polkadot/apps-config authors & contributors
+// Copyright 2017-2023 @polkadot/apps-config authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 /* eslint sort-keys: ["error", "asc", { caseSensitive: false }] */
@@ -44,7 +44,7 @@ import chainKabocha from './chains/kabocha.svg';
 import chainKarura from './chains/karura.svg';
 import chainKico from './chains/kico.png';
 import chainKintsugi from './chains/kintsugi.png';
-import chainKusama from './chains/kusama-128.gif';
+import chainKusama from './chains/kusama.svg';
 import chainListen from './chains/listen.png';
 import chainLogion from './chains/logion.png';
 import chainLuhn from './chains/luhn.png';
@@ -227,6 +227,7 @@ import nodeSubstrateContractsNode from './nodes/substrate-contracts-node.png';
 import nodeSubstrate from './nodes/deeper.png';
 import nodeSwapdex from './nodes/swapdex.svg';
 import nodeTernoa from './nodes/ternoa.svg';
+import nodeTheBifrost from './nodes/thebifrost.png';
 import nodeTrustBase from './nodes/trustbase.png';
 import nodeUniarts from './nodes/uniarts.png';
 import nodeUnique from './nodes/unique.svg';
@@ -998,6 +999,8 @@ export const namedLogos: Record<string, unknown> = {
   ternoa: nodeTernoa,
   'ternoa-alphanet': nodeTernoa,
   'ternoa-testnet': nodeTernoa,
+  'thebifrost-mainnet': nodeTheBifrost,
+  'thebifrost-testnet': nodeTheBifrost,
   tinker: chainTinker,
   'totem-parachain': nodeTotem,
   trustbase: nodeTrustBase,
