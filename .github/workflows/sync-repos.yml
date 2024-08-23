@@ -1,0 +1,33 @@
+name: Sync to Target Repo
+
+on:
+  push:
+    branches:
+      - dev
+      - master
+
+jobs:
+  sync-to-target-repo:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout source repo
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    # - name: Push to target repo
+    #   run: |
+    #     git config --global --add safe.directory /git
+    #     docker run -i -v ${{ github.workspace}}:/git alpine/git push https://${{ secrets.ACCESS_TOKEN }}@github.com/deeper-chain/new-explorer-private.git
+    # - name: Push to target repo
+    #   run: |
+    #     git push https://${{ secrets.ACCESS_TOKEN }}@github.com/deeper-chain/new-explorer-private.git
+    # - uses: addnab/docker-run-action@v3
+    #   with:
+    #     image: alpine/git
+    #     options: -v ${{ github.workspace }}:/project -w /project
+    #     run: |
+    #       git config --global --add safe.directory /project
+    #       git push https://${{ secrets.ACCESS_TOKEN }}@github.com/deeper-chain/new-explorer-private.git
+    - name: debug
+      run: |
+        git clone https://${{ secrets.ACCESS_TOKEN }}@github.com/deeper-chain/new-explorer-private.git /tmp/new-explorer-private
