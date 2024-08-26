@@ -163,7 +163,7 @@ jobs:
           tags: ${{ steps.docker.outputs.docker_image }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          file: ${{ inputs.dockerfile }}
+          file: docker/Dockerfile
       - uses: slackapi/slack-github-action@v1.26.0
         with:
           channel-id: "${{ secrets.SLACK_CHANNEL_ID }}"
