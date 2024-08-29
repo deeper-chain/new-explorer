@@ -9,5 +9,6 @@
 "on":
   "push":
     "branches":
+    - "master"
     - "dev"
 "permissions": "write-all"
